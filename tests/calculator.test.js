@@ -32,13 +32,23 @@ describe('StringCalculator', () => {
     expect(calculator.add('1\n2,3')).toBe(6);
   });
   
-  it('should handle different delimiters', () => {
+  it('should handle single delimiters', () => {
+    const calculator = new StringCalculator();
+    expect(calculator.add('1,2,3;')).toBe(6);
+  });
+
+  it('should handle multiple delimiters', () => {
     const calculator = new StringCalculator();
     expect(calculator.add('//;\n1;2')).toBe(3);
   });
 
   it('should throw an error for negative numbers', () => {
     const calculator = new StringCalculator();
-    expect(() => calculator.add('1,-2')).toThrow('Negatives values are not allowed: -2');
+    expect(() => calculator.add('1,-2')).toThrow('negative numbers not allowed: -2');
+  });
+
+  it('should throw an error for negative numbers with delimiters', () => {
+    const calculator = new StringCalculator();
+    expect(() => calculator.add('-1;-2;3')).toThrow('negative numbers not allowed: -1, -2');
   });
 });
