@@ -51,4 +51,14 @@ describe('StringCalculator', () => {
     const calculator = new StringCalculator();
     expect(() => calculator.add('-1;-2;3')).toThrow('negative numbers not allowed: -1, -2');
   });
+
+  it('should return the sum of two numbers if equal to 1000', () => {
+    const calculator = new StringCalculator();
+    expect(calculator.add('1000,2')).toBe(1002);
+  });
+
+  it('should ignore numbers greater than 1000', () => {
+    const calculator = new StringCalculator();
+    expect(calculator.add('1001,2')).toBe(2);
+  });
 });
